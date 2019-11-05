@@ -1,16 +1,14 @@
 package com.ksqltomysql.iopsksqltomysql;
 
-import entity.FiveMinutesAggData;
+import com.ksqltomysql.iopsksqltomysql.entity.FiveMinutesAggData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
-import repository.FiveMinutesAggDataRepository;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
+import com.ksqltomysql.iopsksqltomysql.repository.FiveMinutesAggDataRepository;
 
 @SpringBootApplication
 @EnableJpaAuditing
-@EnableSwagger2
 public class IopsKsqlToMysqlApplication {
 	@Autowired
 	static FiveMinutesAggDataRepository fiveMinutesAggDataRepository;
