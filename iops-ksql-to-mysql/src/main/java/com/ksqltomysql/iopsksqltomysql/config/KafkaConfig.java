@@ -1,5 +1,8 @@
 package com.ksqltomysql.iopsksqltomysql.config;
 
+import com.ksqltomysql.iopsksqltomysql.entity.BubblingAggDataLvl1;
+import com.ksqltomysql.iopsksqltomysql.entity.BubblingAggDataLvl2;
+import com.ksqltomysql.iopsksqltomysql.entity.BubblingAggDataLvl3;
 import com.ksqltomysql.iopsksqltomysql.entity.FiveMinutesAggData;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
@@ -57,5 +60,59 @@ public class KafkaConfig {
         ConcurrentKafkaListenerContainerFactory<String, FiveMinutesAggData> kafkaListenerContainerFactoryfactory = new ConcurrentKafkaListenerContainerFactory<>();
         kafkaListenerContainerFactoryfactory.setConsumerFactory(userConsumerFactory());
         return kafkaListenerContainerFactoryfactory;
+    }
+
+    @Bean
+    public ConsumerFactory<String, BubblingAggDataLvl1> bubbling1ConsumerFactory() {
+        Map<String, Object> config = new HashMap<>();
+        config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+        config.put(ConsumerConfig.GROUP_ID_CONFIG, "group_id");
+        config.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+        config.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+
+        return new DefaultKafkaConsumerFactory<>(config, new StringDeserializer(), new JsonDeserializer<>(BubblingAggDataLvl1.class));
+    }
+
+    @Bean
+    public ConcurrentKafkaListenerContainerFactory<String, BubblingAggDataLvl1> bubbling1ConcurrentKafkaListenerContainerFactory() {
+        ConcurrentKafkaListenerContainerFactory<String, BubblingAggDataLvl1> bubbling1kafkaListenerContainerFactoryfactory = new ConcurrentKafkaListenerContainerFactory<>();
+        bubbling1kafkaListenerContainerFactoryfactory.setConsumerFactory(bubbling1ConsumerFactory());
+        return bubbling1kafkaListenerContainerFactoryfactory;
+    }
+
+    @Bean
+    public ConsumerFactory<String, BubblingAggDataLvl2> bubbling2ConsumerFactory() {
+        Map<String, Object> config = new HashMap<>();
+        config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+        config.put(ConsumerConfig.GROUP_ID_CONFIG, "group_id");
+        config.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+        config.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+
+        return new DefaultKafkaConsumerFactory<>(config, new StringDeserializer(), new JsonDeserializer<>(BubblingAggDataLvl2.class));
+    }
+
+    @Bean
+    public ConcurrentKafkaListenerContainerFactory<String, BubblingAggDataLvl2> bubbling2ConcurrentKafkaListenerContainerFactory() {
+        ConcurrentKafkaListenerContainerFactory<String, BubblingAggDataLvl2> bubbling2kafkaListenerContainerFactoryfactory = new ConcurrentKafkaListenerContainerFactory<>();
+        bubbling2kafkaListenerContainerFactoryfactory.setConsumerFactory(bubbling2ConsumerFactory());
+        return bubbling2kafkaListenerContainerFactoryfactory;
+    }
+
+    @Bean
+    public ConsumerFactory<String, BubblingAggDataLvl3> bubbling3ConsumerFactory() {
+        Map<String, Object> config = new HashMap<>();
+        config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+        config.put(ConsumerConfig.GROUP_ID_CONFIG, "group_id");
+        config.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+        config.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+
+        return new DefaultKafkaConsumerFactory<>(config, new StringDeserializer(), new JsonDeserializer<>(BubblingAggDataLvl3.class));
+    }
+
+    @Bean
+    public ConcurrentKafkaListenerContainerFactory<String, BubblingAggDataLvl3> bubbling3ConcurrentKafkaListenerContainerFactory() {
+        ConcurrentKafkaListenerContainerFactory<String, BubblingAggDataLvl3> bubbling3kafkaListenerContainerFactoryfactory = new ConcurrentKafkaListenerContainerFactory<>();
+        bubbling3kafkaListenerContainerFactoryfactory.setConsumerFactory(bubbling3ConsumerFactory());
+        return bubbling3kafkaListenerContainerFactoryfactory;
     }
 }
