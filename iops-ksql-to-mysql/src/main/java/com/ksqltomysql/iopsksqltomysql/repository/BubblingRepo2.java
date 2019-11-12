@@ -1,7 +1,6 @@
 package com.ksqltomysql.iopsksqltomysql.repository;
 
-import com.ksqltomysql.iopsksqltomysql.entity.BubblingAggDataLvl2;
-import com.ksqltomysql.iopsksqltomysql.entity.FiveMinutesAggData;
+import com.ksqltomysql.iopsksqltomysql.model.BubblingAggDataLvl2;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,7 +1,7 @@
 /*package com.ksqltomysql.iopsksqltomysql.service;
 
 import com.ksqltomysql.iopsksqltomysql.dao.IGenericDao;
-import com.ksqltomysql.iopsksqltomysql.entity.BubblingAggDataLvl1;
+import com.ksqltomysql.iopsksqltomysql.model.BubblingAggDataLvl1;
 import com.ksqltomysql.iopsksqltomysql.entity.FiveMinutesAggData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;

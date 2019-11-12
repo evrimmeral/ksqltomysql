@@ -1,8 +1,9 @@
 package com.ksqltomysql.iopsksqltomysql.config;
 
-import com.ksqltomysql.iopsksqltomysql.entity.BubblingAggDataLvl1;
-import com.ksqltomysql.iopsksqltomysql.entity.BubblingAggDataLvl2;
-import com.ksqltomysql.iopsksqltomysql.entity.BubblingAggDataLvl3;
+import com.ksqltomysql.iopsksqltomysql.entity.SLOW_RESPONSE_TOP10_5MIN;
+import com.ksqltomysql.iopsksqltomysql.model.BubblingAggDataLvl1;
+import com.ksqltomysql.iopsksqltomysql.model.BubblingAggDataLvl2;
+import com.ksqltomysql.iopsksqltomysql.model.BubblingAggDataLvl3;
 import com.ksqltomysql.iopsksqltomysql.entity.FiveMinutesAggData;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
@@ -99,20 +100,21 @@ public class KafkaConfig {
     }
 
     @Bean
-    public ConsumerFactory<String, BubblingAggDataLvl3> bubbling3ConsumerFactory() {
+    public ConsumerFactory<String, SLOW_RESPONSE_TOP10_5MIN> bubbling3ConsumerFactory() {
         Map<String, Object> config = new HashMap<>();
         config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
         config.put(ConsumerConfig.GROUP_ID_CONFIG, "group_id");
         config.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         config.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
 
-        return new DefaultKafkaConsumerFactory<>(config, new StringDeserializer(), new JsonDeserializer<>(BubblingAggDataLvl3.class));
+        return new DefaultKafkaConsumerFactory<>(config, new StringDeserializer(), new JsonDeserializer<>(SLOW_RESPONSE_TOP10_5MIN.class));
     }
 
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, BubblingAggDataLvl3> bubbling3ConcurrentKafkaListenerContainerFactory() {
-        ConcurrentKafkaListenerContainerFactory<String, BubblingAggDataLvl3> bubbling3kafkaListenerContainerFactoryfactory = new ConcurrentKafkaListenerContainerFactory<>();
+    public ConcurrentKafkaListenerContainerFactory<String, SLOW_RESPONSE_TOP10_5MIN> bubbling3ConcurrentKafkaListenerContainerFactory() {
+        ConcurrentKafkaListenerContainerFactory<String, SLOW_RESPONSE_TOP10_5MIN> bubbling3kafkaListenerContainerFactoryfactory = new ConcurrentKafkaListenerContainerFactory<>();
         bubbling3kafkaListenerContainerFactoryfactory.setConsumerFactory(bubbling3ConsumerFactory());
         return bubbling3kafkaListenerContainerFactoryfactory;
     }
+
 }
